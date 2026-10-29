@@ -1,23 +1,26 @@
+
 const { defineConfig } = require("@playwright/test");
-
-
 
 module.exports = defineConfig({
   testDir: "./tests",
-   retries: 1,
-  timeout: 30_000,
-  expect: { timeout: 5_000 },
   fullyParallel: true,
   retries: process.env.CI ? 1 : 0,
-  reporter: [["list"], ["html", { open: "never" }]],
+  timeout: 30_000,
 
-use: {
-  baseURL: 'https://www.saucedemo.com',
-  testIdAttribute: 'data-test',
+  expect: {
+    timeout: 5_000,
+  },
 
-  screenshot: 'only-on-failure',
-  video: 'retain-on-failure',
-  trace: 'on-first-retry',
-  
-},
+  reporter: [
+    ["list"],
+    ["html", { open: "never" }],
+  ],
+
+  use: {
+    baseURL: "https://www.saucedemo.com",
+    testIdAttribute: "data-test",
+    screenshot: "only-on-failure",
+    video: "retain-on-failure",
+    trace: "retain-on-failure",
+  },
 });
